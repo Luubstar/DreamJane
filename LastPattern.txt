@@ -1,0 +1,16 @@
+Datos: 1101458899309178910 [datachat]
+Titulo: Tu personaje [title]
+Descripcion: Los datos de tu personaje [description]
+Nombre: [nextline]
+Dueño: [nextline] [ownertag]
+Clase: [nextline]
+Raza: [nextline]
+ATA:
+DEF:
+Arma: [nextline]
+Posicion: [nextline] [replychat]
+Ficha: [number]
+
+Boton1: [button id=Ataque, emote=⚔️, command=Tirada: (1d[ATA] + 1d10) * 2d6 Prueba [nextline] Pero debo seguir probado 2*2*2*2 y esto es lo último [ATA], row=0]
+Boton2: [button id=Defensa, emote=🛡️, command=1d[DEF] > 11 Critico [nextline]10 > 2 Critico, row=0]
+Selector: [numberselector max=5, row=4]
