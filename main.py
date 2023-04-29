@@ -1,7 +1,7 @@
 import discord
 from discord import option, commands
 from UI.TextModals import PatternModal
-from UI.Views import TestView
+from UI.Views import TestView, PossitionView
 from DataManager import EmbedByPattern, Start, GetLastPattern, GetDataChat, GetAdmin
 from Database import PushListToDb, GetDataByOwner
 import asyncio
@@ -54,6 +54,6 @@ def main(botToken:str):
             
     @bot.command(name="aviso_posición", description="Pone un sistema para cambiar tu ubicación a este chat")
     async def possition(interaction):
-        pass
+        await interaction.respond(view=PossitionView())
         
     bot.run(botToken)

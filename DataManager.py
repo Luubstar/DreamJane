@@ -1,6 +1,6 @@
 from discord import Embed
 import exceptionHandler as eh
-import rolldice
+import rolldice,os,sqlite3
 import re
 from ast import literal_eval
 
@@ -9,6 +9,7 @@ class Manager():
     Datachat = None
     Ownername = ""
     Fichaname = ""
+    PosicionName = ""
     
     BotonesComandos = []
     SliderSetting = None
@@ -18,7 +19,7 @@ class Manager():
 
 admin = Manager()
 Commands = ["[nextline]", "[title]", "[description]","[datachat]", "[replychat]", "[number]", "[ownertag]", "[button", "[numberselector"]
-SpecialCommands = ["[title]", "[description]","[datachat]", "[replychat]", "[button", "[numberselector"]
+SpecialCommands = ["[title]", "[description]","[datachat]", "[button", "[numberselector"]
 
 async def EmbedByPattern(pattern :str,interaction , values = []):
     try:
@@ -41,6 +42,9 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                         
                     if linea.lower().__contains__("[number]"):
                         admin.Fichaname = linea.split(":")[0]
+                        
+                    if linea.lower().__contains__("[replychat]"):
+                        admin.PosicionName = linea.split(":")[0]
                         
                     if linea.lower().__contains__("[button"):
                         cadena = linea.split("[button")[1]
@@ -79,11 +83,9 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                     elif linea.lower().__contains__("[datachat]"):
                         admin.Datachat = GetChannelByID(int(linea.split(":")[1].replace("[datachat]", "").strip()), interaction)
                     else: 
-                        if not linea.lower().__contains__("[replychat]"):
-                            
-                            for val in values:
-                                if val[0].lower() == linea.lower().split(":")[0]:
-                                    value = val[1]
+                        for val in values:
+                            if val[0].lower() == linea.lower().split(":")[0]:
+                                value = val[1]
                         if not HasSpecialCommand(linea.lower()) and not linea.strip() == "":
                             parent.add_field(name= linea.split(":")[0], value=value, inline=nextline)
                         
@@ -103,11 +105,26 @@ async def Start(interaction):
         global admin
         admin.Pattern = f.read()
         lineas = admin.Pattern.split("\n")
+        
+        if os.path.exists("players.db"):
+            os.remove("players.db")
+        con = sqlite3.connect("players.db")
+        cur = con.cursor()
+        data = ""
+        for linea in admin.Pattern.split("\n"):
+            if linea.strip().__len__() > 0:
+                if not HasSpecialCommand(linea.split(":")[1]):
+                    data += linea.split(":")[0] + " DEFAULT '',"
+        data = data[:-1]
+        cur.execute(f"CREATE TABLE jugadores ({data})")
+        con.close()
+        
         for linea in lineas:
             if linea.__contains__(":"):
                 if linea.lower().__contains__("[datachat]"):
                         admin.Datachat = GetChannelByID(int(linea.split(":")[1].replace("[datachat]", "").strip()), interaction)
         await interaction.respond("Iniciado")
+        
     except Exception as e: await eh.InteractionException(e, interaction)
     
         
@@ -196,7 +213,6 @@ def procesar_entrada(cadena):
     if elem != "":
         elementos.append(elem)
     
-    print(elementos)
     res = []
     next = True
     for item in elementos:
@@ -220,7 +236,6 @@ def procesar_entrada(cadena):
                         res.append(item.split(comparador)[0] + f" [{item}]  ")
                     else:
                         res.append(item.split(comparador)[0])
-                print(compara, next)
             else: next = True
         except:res.append(item)
     

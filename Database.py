@@ -3,6 +3,10 @@ import os,re
 import exceptionHandler as eh
 from DataManager import HasSpecialCommand, ClearPattern, GetAdmin
 
+async def Start(mensaje):
+    await NewDatabaseByPattern(mensaje)
+
+
 async def NewDatabaseByPattern(pattern :str):
     if os.path.exists("players.db"):
         os.remove("players.db")
@@ -12,7 +16,7 @@ async def NewDatabaseByPattern(pattern :str):
     for linea in pattern.split("\n"):
         if linea.strip().__len__() > 0:
             if not HasSpecialCommand(linea.split(":")[1]):
-                data += linea.split(":")[0] + ","
+                data += linea.split(":")[0] + " DEFAULT '',"
     data = data[:-1]
     cur.execute(f"CREATE TABLE jugadores ({data})")
     con.close()
@@ -30,19 +34,24 @@ async def PushListToDb(messages: list, interaction):
         
         for mensaje in messages:
             MsgList.clear()
-            try:
-                for msg in mensaje.content.split("\n"):
-                    if not HasSpecialCommand(msg):
-                        MsgList.append([msg.split(":")[0], ClearPattern(msg.split(":")[1])])
-            except Exception as e: print(e)
+            for msg in mensaje.content.split("\n"):
+                if not HasSpecialCommand(msg):
+                    MsgList.append([msg.split(":")[0], ClearPattern(msg.split(":")[1])])
             
             Datos = ""
             Valores = ""
             for name in names:
                 Datos += "'"+name+"'" + ","
+                asignado = False
+                
                 for item in MsgList:
                     if name.lower() == item[0].lower():
                         Valores += "'"+item[1]+"'" + ","
+                        asignado = True
+                        break
+                    
+                if not asignado:
+                    Valores += "'NA'," 
                         
             Datos = Datos[:-1]
             Valores = Valores[:-1]
@@ -76,8 +85,6 @@ def GetListOfData(owner):
     con = sqlite.connect("players.db")
     cur = con.cursor()
     admin = GetAdmin()
-
-    cursor = con.execute('select * from jugadores')
     
     filtro = admin.Ownername + " LIKE '%" + owner + "%'"
     cur.execute(f"SELECT * FROM jugadores WHERE {filtro};")
@@ -86,23 +93,24 @@ def GetListOfData(owner):
     con.close()
     return data
 
-async def replaceFromString(string:str):
+async def replaceFromString(string:str, owner, ownername, pos, posname):
     con = sqlite.connect("players.db")
     cur = con.cursor()
     
     columnas = re.findall(r'\[([A-Z]+)\]', string)
 
     for columna in columnas:
-        cur.execute(f"SELECT {columna} FROM jugadores")
+        cur.execute(f"SELECT {columna} FROM jugadores WHERE {ownername} LIKE '%{owner}%' AND {posname} LIKE '%{pos}%'")
         valor = cur.fetchone()[0]
         string = string.replace(f"[{columna}]",str(valor).strip()).strip()
     con.close()
     return string.strip()
 
-async def ChangePosition(id):
+async def Update(newval, name, owner, ownername):
     con = sqlite.connect("players.db")
     cur = con.cursor()
     
-    cur.execute("UPDATE")
+    cur.execute(f"UPDATE jugadores SET {name} = '{newval}' WHERE {ownername} LIKE '%{owner}%' ")
+    con.commit()
     
     con.close()
