@@ -24,7 +24,19 @@ class CustomButton(Button):
         if interaction.user.mention == self.owner:
             admin = GetAdmin()
             cadena = await diceParser(await replaceFromString(self.command, self.owner, admin.Ownername, self.position, admin.Fichaname))
-            await interaction.followup.send(cadena.replace("[nextline]", "\n"))  
+            
+            lista = await GetDataByOwner(self.owner, None, self.position)
+            chatid = "NA"
+            for item in lista:
+                if (item[0] == admin.PosicionName):
+                    chatid = item[1].replace("<#", "").replace(">","")
+                    
+            canal = None
+            for channel in interaction.guild.channels:
+                if int(channel.id) == int(chatid):
+                    canal = channel
+            
+            await canal.send(interaction.user.mention +": \n" +cadena.replace("[nextline]", "\n"))  
         
 
 class CustomSelector(Select):

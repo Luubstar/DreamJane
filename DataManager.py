@@ -10,7 +10,6 @@ class Manager():
     Ownername = ""
     Fichaname = ""
     PosicionName = ""
-    
     BotonesComandos = []
     SliderSetting = None
     def __init__(self) -> None:
