@@ -31,12 +31,17 @@ async def PushListToDb(messages: list, interaction):
         names = list(map(lambda x: x[0], cursor.description))
         
         MsgList = []
-        
         for mensaje in messages:
             MsgList.clear()
+            Cabeceras = []
             for msg in mensaje.content.split("\n"):
-                if not HasSpecialCommand(msg):
-                    MsgList.append([msg.split(":")[0], ClearPattern(msg.replace(msg.split(":")[0] +":",""))])
+                if not HasSpecialCommand(msg) and msg.__contains__(":"):
+                    Cabeceras.append(msg.split(":")[0])
+            
+            for i in range(0, len(Cabeceras)-1):
+                MsgList.append([Cabeceras[i], mensaje.content.split(Cabeceras[i]+":")[1].split(Cabeceras[i+1]+":")[0].strip()])
+
+            MsgList.append([Cabeceras[len(Cabeceras)-1], mensaje.content.split(Cabeceras[len(Cabeceras)-1]+":")[1].strip()])                
             
             Datos = ""
             Valores = ""
@@ -46,7 +51,7 @@ async def PushListToDb(messages: list, interaction):
                 
                 for item in MsgList:
                     if name.lower() == item[0].lower():
-                        Valores += "'"+item[1]+"'" + ","
+                        Valores += "'"+item[1].strip()+"'" + ","
                         asignado = True
                         break
                     

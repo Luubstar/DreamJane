@@ -1,11 +1,15 @@
 Datos: 1101944060945629244 [datachat]
 Titulo: Menú Forever Dreams [title]
 Descripcion: Datos de tu personaje actual [description]
-Nombre: [nextline]
+Nombre:
 Avatar: [avatar]
-Dueño: [nextline] [ownertag]
+Dueño: [ownertag]
 Clase: [nextline]
 Raza: [nextline]
+Habilidades: [noshow]
+Magias: [noshow]
+Equipo: [noshow]
+Inventario: [noshow]
 FUE:
 AGI:
 VIT:
@@ -17,11 +21,11 @@ DM:
 CAR:
 SUE:
 Chat de batalla: [nextline] [replychat]
-Ficha: [number]
+Ficha: [number] [noshow]
 
 ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA] >= [SUE]/4 Crítico (daño x2) [skip]. Si acierta causa 1d[FUE] de daño, row=0]
 
-DEFENSA: [button id=Defensa, emote=🛡️, command=Defensa: 1d[DEF], row=0]
+DEFENSA: [button id=Defensa, emote=🛡️, command=Defensa: 1d[DE], row=0]
 
 ATAQUE MAGICO: [button id=Ataque mágico, emote=🌀, command=Ataque mágico: 1d[MEN] >= [SUE]/4 Crítico (daño x2), row=0]
 
@@ -37,6 +41,12 @@ CARISMA: [button id=Carisma, emote=💬, command=Carisma: 1d[CAR], row=1]
 
 AVATAR: [button id=Avatar, emote=📷, command=[nodice] [Avatar], row=2]
 
+HABILIDADES: [button id=Habilidades, emote=📚, command=[nodice] [Habilidades], row=2]
+
+MAGIAS: [button id=Magias, emote=🪄, command=[nodice] [Magias], row=2]
+
+EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Equipo], row=2]
+
+INVENTARIO: [button id=Inventario, emote=🎒, command=[nodice] [Inventario], row=2]
 
 Selector: [numberselector max=5, row=4] 
-

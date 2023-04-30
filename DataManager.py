@@ -18,7 +18,7 @@ class Manager():
     
 
 admin = Manager()
-Commands = ["[nextline]", "[title]", "[description]","[datachat]", "[replychat]", "[number]", "[ownertag]", "[button", "[numberselector", "[avatar]"]
+Commands = ["[nextline]", "[title]", "[description]","[datachat]", "[replychat]", "[number]", "[ownertag]", "[button", "[numberselector", "[avatar]", "[noshow]"]
 SpecialCommands = ["[title]", "[description]","[datachat]", "[button", "[numberselector"]
 
 async def EmbedByPattern(pattern :str,interaction , values = []):
@@ -30,7 +30,7 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
             global admin
             admin.BotonesComandos.clear()
             for linea in lineas:
-                value = "null"
+                value = "No Asignado"
                 if linea.__contains__(":"):
                     
                     nextline = True
@@ -91,10 +91,11 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                                 value = val[1]
                         if  linea.lower().__contains__("[avatar]"):
                             try:
-                                if str(value) != "null":
+                                if str(value) != "No Asignado":
                                     parent.set_image(url=value)
                             except:pass
-                        if not HasSpecialCommand(linea.lower()) and not linea.lower().__contains__("[avatar]") and not linea.strip() == "":
+                            
+                        if not HasSpecialCommand(linea.lower()) and not linea.lower().__contains__("[avatar]") and not linea.lower().__contains__("[noshow]") and not linea.strip() == "":
                             parent.add_field(name= linea.split(":")[0], value=value, inline=nextline)
                             
                         
@@ -165,7 +166,9 @@ def HasSpecialCommand(msg):
     return False
 
 async def diceParser(entrada: str):
+    print(entrada)
     dados = await find_critdice(entrada)
+    print(dados)
     valores =[]
     for dado in dados:
         result, explanation = rolldice.rolldice.roll_dice(dado,floats=False)
