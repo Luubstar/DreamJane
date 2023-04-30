@@ -2,6 +2,7 @@ Datos: 1101944060945629244 [datachat]
 Titulo: Menú Forever Dreams [title]
 Descripcion: Datos de tu personaje actual [description]
 Nombre: [nextline]
+Avatar: [avatar]
 Dueño: [nextline] [ownertag]
 Clase: [nextline]
 Raza: [nextline]
@@ -33,6 +34,9 @@ VITALIDAD: [button id=Vitalidad, emote=🥊, command=Vitalidad: 1d[VIT], row=1]
 SUERTE: [button id=Suerte, emote=🍀, command=Suerte: 1d[SUE], row=1]
 
 CARISMA: [button id=Carisma, emote=💬, command=Carisma: 1d[CAR], row=1]
+
+AVATAR: [button id=Avatar, emote=📷, command=[nodice] [Avatar], row=2]
+
 
 Selector: [numberselector max=5, row=4] 
 

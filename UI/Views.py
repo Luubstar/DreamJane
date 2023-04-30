@@ -24,8 +24,13 @@ class CustomButton(Button):
         await interaction.response.defer()
         if interaction.user.mention == self.owner:
             admin = GetAdmin()
-            cadena = await diceParser(await replaceFromString(self.command, self.owner, admin.Ownername, self.position, admin.Fichaname))
+            rawval = await replaceFromString(self.command, self.owner, admin.Ownername, self.position, admin.Fichaname)
             
+            if not rawval.__contains__("[nodice]"):
+                cadena = await diceParser(rawval)
+            else:
+                cadena = rawval.replace("[nodice]", "")
+                
             lista = await GetDataByOwner(self.owner, None, self.position)
             chatid = "NA"
             for item in lista:

@@ -33,6 +33,7 @@ def main(botToken:str):
     async def test_embed(interaction, ficha = 1):
         if GetAdmin().Ownername == "":
             embed = await EmbedByPattern(GetLastPattern(), interaction)
+            
         embed = await EmbedByPattern(GetLastPattern(), interaction, await GetDataByOwner(interaction.author.mention, interaction, ficha))
         await interaction.respond(embed=embed,view=TestView(GetAdmin().BotonesComandos, GetAdmin().SliderSetting))
     

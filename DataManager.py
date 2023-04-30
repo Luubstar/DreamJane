@@ -10,6 +10,7 @@ class Manager():
     Ownername = ""
     Fichaname = ""
     PosicionName = ""
+    AvatarName = ""
     BotonesComandos = []
     SliderSetting = None
     def __init__(self) -> None:
@@ -17,7 +18,7 @@ class Manager():
     
 
 admin = Manager()
-Commands = ["[nextline]", "[title]", "[description]","[datachat]", "[replychat]", "[number]", "[ownertag]", "[button", "[numberselector"]
+Commands = ["[nextline]", "[title]", "[description]","[datachat]", "[replychat]", "[number]", "[ownertag]", "[button", "[numberselector", "[avatar]"]
 SpecialCommands = ["[title]", "[description]","[datachat]", "[button", "[numberselector"]
 
 async def EmbedByPattern(pattern :str,interaction , values = []):
@@ -44,6 +45,9 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                         
                     if linea.lower().__contains__("[replychat]"):
                         admin.PosicionName = linea.split(":")[0]
+                        
+                    if linea.lower().__contains__("[avatar]"):
+                        admin.AvatarName = linea.split(":")[0]
                         
                     if linea.lower().__contains__("[button"):
                         cadena = linea.split("[button")[1]
@@ -85,8 +89,14 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                         for val in values:
                             if val[0].lower() == linea.lower().split(":")[0]:
                                 value = val[1]
-                        if not HasSpecialCommand(linea.lower()) and not linea.strip() == "":
+                        if  linea.lower().__contains__("[avatar]"):
+                            try:
+                                if str(value) != "null":
+                                    parent.set_image(url=value)
+                            except:pass
+                        if not HasSpecialCommand(linea.lower()) and not linea.lower().__contains__("[avatar]") and not linea.strip() == "":
                             parent.add_field(name= linea.split(":")[0], value=value, inline=nextline)
+                            
                         
             admin.Pattern = pattern
             await SavePattern(pattern)

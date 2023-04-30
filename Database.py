@@ -36,7 +36,7 @@ async def PushListToDb(messages: list, interaction):
             MsgList.clear()
             for msg in mensaje.content.split("\n"):
                 if not HasSpecialCommand(msg):
-                    MsgList.append([msg.split(":")[0], ClearPattern(msg.split(":")[1])])
+                    MsgList.append([msg.split(":")[0], ClearPattern(msg.replace(msg.split(":")[0] +":",""))])
             
             Datos = ""
             Valores = ""
@@ -97,12 +97,14 @@ async def replaceFromString(string:str, owner, ownername, pos, posname):
     con = sqlite.connect("players.db")
     cur = con.cursor()
     
-    columnas = re.findall(r'\[([A-Z]+)\]', string)
-
+    columnas = re.findall(r"\[[^\]]*\]", string)
     for columna in columnas:
-        cur.execute(f"SELECT {columna} FROM jugadores WHERE {ownername} LIKE '%{owner}%' AND {posname} LIKE '%{pos}%'")
-        valor = cur.fetchone()[0]
-        string = string.replace(f"[{columna}]",str(valor).strip()).strip()
+        try:
+            columna = columna.replace("[", "").replace("]", "")
+            cur.execute(f"SELECT {columna} FROM jugadores WHERE {ownername} LIKE '%{owner}%' AND {posname} LIKE '%{pos}%'")
+            valor = cur.fetchone()[0]
+            string = string.replace(f"[{columna}]",str(valor).strip()).strip()
+        except: pass
     con.close()
     return string.strip()
 
