@@ -52,7 +52,7 @@ def main(botToken:str):
         if mensaje:
             await interaction.respond("Lectura hecha")
             
-    @bot.command(name="aviso_posición", description="Pone un sistema para cambiar tu ubicación a este chat")
+    @bot.command(name="posición", description="Pone un sistema para cambiar tu ubicación a este chat")
     async def possition(interaction):
         await interaction.respond(view=PossitionView())
         

@@ -20,7 +20,7 @@ Ficha: [number]
 
 ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA] >= [SUE]/4 Crítico (daño x2) [skip]. Si acierta causa 1d[FUE] de daño, row=0]
 
-DEFENSA: [button id=Defensa, emote=🛡️, command=Defensa: 1d[DE], row=0]
+DEFENSA: [button id=Defensa, emote=🛡️, command=Defensa: 1d[DEF], row=0]
 
 ATAQUE MAGICO: [button id=Ataque mágico, emote=🌀, command=Ataque mágico: 1d[MEN] >= [SUE]/4 Crítico (daño x2), row=0]
 
@@ -35,3 +35,4 @@ SUERTE: [button id=Suerte, emote=🍀, command=Suerte: 1d[SUE], row=1]
 CARISMA: [button id=Carisma, emote=💬, command=Carisma: 1d[CAR], row=1]
 
 Selector: [numberselector max=5, row=4] 
+

@@ -9,6 +9,7 @@ from discord.ui.item import Item
 
 from Database import replaceFromString, GetListOfData, GetDataByOwner, Update
 from DataManager import diceParser, EmbedByPattern,GetAdmin,GetLastPattern
+from discord import PartialEmoji
 
 class CustomButton(Button):
     command = ""
@@ -32,11 +33,14 @@ class CustomButton(Button):
                     chatid = item[1].replace("<#", "").replace(">","")
                     
             canal = None
-            for channel in interaction.guild.channels:
-                if int(channel.id) == int(chatid):
-                    canal = channel
+            if chatid != "NA":
+                for channel in interaction.guild.channels:
+                    if int(channel.id) == int(chatid):
+                        canal = channel
             
-            await canal.send(interaction.user.mention +": \n" +cadena.replace("[nextline]", "\n"))  
+                await canal.send(interaction.user.mention +": \n" +cadena.replace("[nextline]", "\n").replace("[skip]", "")) 
+            else:
+                await interaction.followup.send(interaction.user.mention +": \n" +cadena.replace("[nextline]", "\n").replace("[skip]", "")) 
         
 
 class CustomSelector(Select):
@@ -65,14 +69,12 @@ class TestView(discord.ui.View):
     def __init__(self, buttons, selector, position = 1,*items: Item, timeout: float | None = 270, disable_on_timeout: bool = False):
         super().__init__(*items, timeout=timeout, disable_on_timeout=disable_on_timeout)
         for button in buttons:
-            but = CustomButton(command=button[2], owner=button[4], label=button[0],emoji=button[1], row=int(button[3]), style=discord.ButtonStyle.green, position=position)
+            but = CustomButton(command=button[2], owner=button[4], label=button[0],emoji=PartialEmoji.from_str(str(button[1]).strip()), row=int(button[3]), style=discord.ButtonStyle.green, position=position)
             self.add_item(but)
 
         sel = CustomSelector(owner=selector[2], row=int(selector[1]), max_values=1, min_values=0)
         self.add_item(sel)
        
-       
- 
     
 class PossitionView(discord.ui.View):
     
