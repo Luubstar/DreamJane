@@ -4,9 +4,9 @@ Descripcion: Datos de tu personaje actual [description]
 Nombre:
 Avatar: [avatar]
 Jugador: [ownertag]
-Oro: [nextline]
 Profesión: [nextline]
-Raza: [nextline]
+Raza: 
+Oro: [nextline]
 Habilidades: [noshow]
 Magias: [noshow]
 
@@ -16,7 +16,6 @@ Arma 2: [noshow]
 Arma 3: [noshow]
 Anillo 1: [noshow]
 Anillo 2: [noshow]
-Set: [noshow]
 Amuleto 1: [noshow]
 Amuleto 2: [noshow]
 
@@ -31,7 +30,7 @@ MA:
 DM:
 CAR:
 SUE:
-Chat de batalla: [nextline] [replychat]
+Chat: [nextline] [replychat]
 Ficha: [number] [noshow]
 
 ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA] >= [SUE]/4 Crítico (daño x2) [skip]. Si acierta causa 1d[FUE] de daño, row=0]
@@ -56,12 +55,7 @@ HABILIDADES: [button id=Habilidades, emote=📚, command=[nodice] [Habilidades],
 
 MAGIAS: [button id=Magias, emote=🪄, command=[nodice] [Magias], row=2]
 
-EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Set] [nextline]
-[Arma 1] [nextline]
-[Arma 2] [nextline]
-[Arma 3] [nextline]
-[Amuleto 1] [nextline]
-[Amuleto 2] [nextline], row=2]
+EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Set] [nextline] [Arma 1] [nextline] [Arma 2] [nextline] [Arma 3] [nextline] [Amuleto 1] [nextline] [Amuleto 2] [nextline], row=2]
 
 INVENTARIO: [button id=Inventario, emote=🎒, command=[nodice] [Inventario], row=2]
 

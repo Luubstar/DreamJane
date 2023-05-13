@@ -26,13 +26,11 @@ def main(botToken:str):
             await asyncio.sleep(60)
     
     @bot.command(name="ping", description="Comprueba si el bot va")
-    @commands.default_permissions(administrator=True)
     async def test_command(interaction):
         await interaction.respond("Pong!")     
     
     @bot.command(name="yo", description="Muestra tu ficha")
     @option("ficha", int, description="Ficha de personaje a elegir", required=False)
-    @commands.default_permissions(administrator=True)
     async def test_embed(interaction, ficha = 1):
         if GetAdmin().Ownername == "":
             embed = await EmbedByPattern(GetLastPattern(), interaction)

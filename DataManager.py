@@ -91,7 +91,7 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                                 value = val[1]
                         if  linea.lower().__contains__("[avatar]"):
                             try:
-                                if str(value) != "No Asignado":
+                                if str(value) != "NA":
                                     parent.set_image(url=value)
                             except:pass
                             
@@ -122,9 +122,9 @@ async def Start(interaction):
         cur = con.cursor()
         data = ""
         for linea in admin.Pattern.split("\n"):
-            if linea.strip().__len__() > 0:
+            if linea.strip().__len__() > 0 and linea.__contains__(":"):
                 if not HasSpecialCommand(linea.split(":")[1]):
-                    data += linea.split(":")[0] + " DEFAULT '',"
+                    data += "'"+linea.split(":")[0] + "' DEFAULT '',"
         data = data[:-1]
         cur.execute(f"CREATE TABLE jugadores ({data})")
         con.close()

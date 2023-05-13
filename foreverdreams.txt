@@ -4,9 +4,9 @@ Descripcion: Datos de tu personaje actual [description]
 Nombre:
 Avatar: [avatar]
 Jugador: [ownertag]
-Oro: [nextline]
 Profesión: [nextline]
-Raza: [nextline]
+Raza: 
+Oro: [nextline]
 Habilidades: [noshow]
 Magias: [noshow]
 
@@ -30,7 +30,7 @@ MA:
 DM:
 CAR:
 SUE:
-Chat de batalla: [nextline] [replychat]
+Chat: [nextline] [replychat]
 Ficha: [number] [noshow]
 
 ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA] >= [SUE]/4 Crítico (daño x2) [skip]. Si acierta causa 1d[FUE] de daño, row=0]
