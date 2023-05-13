@@ -15,7 +15,7 @@ class CustomButton(Button):
     command = ""
     owner = None
     position = ""
-    def __init__(self, *,command, owner, position, style: ButtonStyle = ButtonStyle.secondary, label: str | None = None, disabled: bool = False, custom_id: str | None = None, url: str | None = None, emoji: str | Emoji | PartialEmoji | None = None, row: int | None = None):
+    def __init__(self, *,command, owner, position, style = ButtonStyle.secondary, label = None, disabled: bool = False, custom_id = None, url = None, emoji= None, row = None):
         super().__init__(style=style, label=label, disabled=disabled, custom_id=custom_id, url=url, emoji=emoji, row=row)
         self.command = command
         self.owner = owner
@@ -50,7 +50,7 @@ class CustomButton(Button):
 
 class CustomSelector(Select):
     owner = None
-    def __init__(self,owner,select_type: ComponentType = ComponentType.string_select, *, custom_id: str | None = None, placeholder: str | None = None, min_values: int = 1, max_values: int = 1, options: list[SelectOption] = None, channel_types: list[ChannelType] = None, disabled: bool = False, row: int | None = None) -> None:
+    def __init__(self,owner,select_type = ComponentType.string_select, *, custom_id = None, placeholder = None, min_values = 1, max_values = 1, options = None, channel_types = None, disabled: bool = False, row = None) -> None:
         super().__init__(select_type, custom_id=custom_id, placeholder=placeholder, min_values=min_values, max_values=max_values, options=options, channel_types=channel_types, disabled=disabled, row=row)
         self.owner = owner
         lista = GetListOfData(owner)
@@ -71,7 +71,7 @@ class CustomSelector(Select):
 
 class TestView(discord.ui.View): 
     
-    def __init__(self, buttons, selector, position = 1,*items: Item, timeout: float | None = 270, disable_on_timeout: bool = False):
+    def __init__(self, buttons, selector, position = 1,*items: Item, timeout = 270, disable_on_timeout: bool = False):
         super().__init__(*items, timeout=timeout, disable_on_timeout=disable_on_timeout)
         for button in buttons:
             but = CustomButton(command=button[2], owner=button[4], label=button[0],emoji=PartialEmoji.from_str(str(button[1]).strip()), row=int(button[3]), style=discord.ButtonStyle.green, position=position)
@@ -83,7 +83,7 @@ class TestView(discord.ui.View):
     
 class PossitionView(discord.ui.View):
     
-    def __init__(self, *items: Item, timeout: float | None = 180, disable_on_timeout: bool = False):
+    def __init__(self, *items: Item, timeout = 180, disable_on_timeout: bool = False):
         super().__init__(*items, timeout=timeout, disable_on_timeout=disable_on_timeout)
     
     @discord.ui.button(label="Cambiar posición", row=0, style=discord.ButtonStyle.blurple)

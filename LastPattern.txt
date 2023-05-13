@@ -1,14 +1,25 @@
-Datos: 1101944060945629244 [datachat]
-Titulo: Menú Forever Dreams [title]
+Datos: 1098791644469411930 [datachat]
+Titulo: Forever Dreams [title]
 Descripcion: Datos de tu personaje actual [description]
 Nombre:
 Avatar: [avatar]
-Dueño: [ownertag]
-Clase: [nextline]
+Jugador: [ownertag]
+Oro: [nextline]
+Profesión: [nextline]
 Raza: [nextline]
 Habilidades: [noshow]
 Magias: [noshow]
-Equipo: [noshow]
+
+Set: [noshow]
+Arma 1: [noshow]
+Arma 2: [noshow]
+Arma 3: [noshow]
+Anillo 1: [noshow]
+Anillo 2: [noshow]
+Set: [noshow]
+Amuleto 1: [noshow]
+Amuleto 2: [noshow]
+
 Inventario: [noshow]
 FUE:
 AGI:
@@ -45,7 +56,12 @@ HABILIDADES: [button id=Habilidades, emote=📚, command=[nodice] [Habilidades],
 
 MAGIAS: [button id=Magias, emote=🪄, command=[nodice] [Magias], row=2]
 
-EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Equipo], row=2]
+EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Set] [nextline]
+[Arma 1] [nextline]
+[Arma 2] [nextline]
+[Arma 3] [nextline]
+[Amuleto 1] [nextline]
+[Amuleto 2] [nextline], row=2]
 
 INVENTARIO: [button id=Inventario, emote=🎒, command=[nodice] [Inventario], row=2]
 

@@ -6,6 +6,9 @@ from DataManager import EmbedByPattern, Start, GetLastPattern, GetDataChat, GetA
 from Database import PushListToDb, GetDataByOwner
 import asyncio
 BotonesPersonalizables = ["Ataque", "Defensa"]
+Token = "MTEwMTM5MzU3MDI4MTMwODE5Mg.G6Qyeq.KJdPgTmUtAIsPIC9GJUVAPpeguoSxk6BiLH3cs"
+
+
 
 def main(botToken:str):
     
@@ -58,3 +61,6 @@ def main(botToken:str):
         await interaction.respond(view=PossitionView())
         
     bot.run(botToken)
+    
+    
+main(Token)

@@ -14,10 +14,11 @@ async def NewDatabaseByPattern(pattern :str):
     cur = con.cursor()
     data = ""
     for linea in pattern.split("\n"):
-        if linea.strip().__len__() > 0:
+        if linea.strip().__len__() > 0 and linea.__contains__(":"):
             if not HasSpecialCommand(linea.split(":")[1]):
-                data += linea.split(":")[0] + " DEFAULT '',"
+                data += "'" + linea.split(":")[0] + "' DEFAULT '',"
     data = data[:-1]
+    print(data)
     cur.execute(f"CREATE TABLE jugadores ({data})")
     con.close()
     
