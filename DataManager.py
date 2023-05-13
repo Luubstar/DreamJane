@@ -30,7 +30,7 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
             global admin
             admin.BotonesComandos.clear()
             for linea in lineas:
-                value = "No Asignado"
+                value = "NA"
                 if linea.__contains__(":"):
                     
                     nextline = True
@@ -91,7 +91,7 @@ async def EmbedByPattern(pattern :str,interaction , values = []):
                                 value = val[1]
                         if  linea.lower().__contains__("[avatar]"):
                             try:
-                                if str(value) != "NA":
+                                if str(value) != "NA":  
                                     parent.set_image(url=value)
                             except:pass
                             
