@@ -33,11 +33,11 @@ SUE:
 Chat: [nextline] [replychat]
 Ficha: [number] [noshow]
 
-ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA] >= [SUE]/4 Crítico (daño x2) [skip]. Si acierta causa 1d[FUE] de daño, row=0]
+ATAQUE: [button id=Ataque, emote=⚔️, command=Ataque: 1d[ATA].  Si acierta causa 1d[FUE] de daño, row=0]
 
 DEFENSA: [button id=Defensa, emote=🛡️, command=Defensa: 1d[DE], row=0]
 
-ATAQUE MAGICO: [button id=Ataque mágico, emote=🌀, command=Ataque mágico: 1d[MEN] >= [SUE]/4 Crítico (daño x2), row=0]
+ATAQUE MAGICO: [button id=Ataque mágico, emote=🌀, command=Ataque mágico: 1d[MEN] , row=0]
 
 DEFENSA MAGICA: [button id=Defensa mágica, emote=💠, command=Defensa mágica: 1d[DM], row=0]
 
@@ -59,4 +59,4 @@ EQUIPO: [button id=Equipo, emote=🥋, command=[nodice] [Set] [nextline] [Arma 1
 
 INVENTARIO: [button id=Inventario, emote=🎒, command=[nodice] [Inventario], row=2]
 
-Selector: [numberselector max=5, row=4] 
+Selector: [numberselector max=5, row=4]

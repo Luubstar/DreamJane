@@ -71,7 +71,7 @@ class CustomSelector(Select):
 
 class TestView(discord.ui.View): 
     
-    def __init__(self, buttons, selector, position = 1,*items: Item, timeout = 270, disable_on_timeout: bool = False):
+    def __init__(self, buttons, selector, position = 1,*items: Item, timeout = 600, disable_on_timeout: bool = False):
         super().__init__(*items, timeout=timeout, disable_on_timeout=disable_on_timeout)
         for button in buttons:
             but = CustomButton(command=button[2], owner=button[4], label=button[0],emoji=PartialEmoji.from_str(str(button[1]).strip()), row=int(button[3]), style=discord.ButtonStyle.green, position=position)
@@ -83,7 +83,7 @@ class TestView(discord.ui.View):
     
 class PossitionView(discord.ui.View):
     
-    def __init__(self, *items: Item, timeout = 180, disable_on_timeout: bool = False):
+    def __init__(self, *items: Item, timeout = 600, disable_on_timeout: bool = False):
         super().__init__(*items, timeout=timeout, disable_on_timeout=disable_on_timeout)
     
     @discord.ui.button(label="Cambiar posición", row=0, style=discord.ButtonStyle.blurple)

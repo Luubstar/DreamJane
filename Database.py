@@ -18,7 +18,6 @@ async def NewDatabaseByPattern(pattern :str):
             if not HasSpecialCommand(linea.split(":")[1]):
                 data += "'" + linea.split(":")[0] + "' DEFAULT '',"
     data = data[:-1]
-    print(data)
     cur.execute(f"CREATE TABLE jugadores ({data})")
     con.close()
     

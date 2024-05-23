@@ -188,7 +188,7 @@ async def reemplazar_dados(cadena, valores):
     dados = re.findall(r"\b\d+d\d+(?:\*\d+)?\b", cadena)
 
     for i, dado in enumerate(dados):
-        cadena = re.sub(dado, str(valores[i]), cadena, count=1)
+        cadena = re.sub(dado, str(int(valores[i])), cadena, count=1)
 
     cadena = procesar_entrada(cadena)
    
